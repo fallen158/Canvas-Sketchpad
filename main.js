@@ -15,7 +15,8 @@ clear.onclick = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 };
 
-download.onclick = () => { //下载图片
+download.onclick = () => {
+  //下载图片
   let url = canvas.toDataURL("image/png");
   let a = document.createElement("a");
   document.body.appendChild(a);
@@ -81,6 +82,9 @@ blue.onclick = () => {
   red.classList.remove("active");
 };
 
+
+
+
 /********下面不用看********/
 
 function listenOnUser(canvas) {
@@ -89,6 +93,7 @@ function listenOnUser(canvas) {
   //特性检查
   if (document.body.ontouchstart !== undefined) {
     canvas.ontouchstart = e => {
+      e.preventDefault();
       let x = e.touches[0].clientX;
       let y = e.touches[0].clientY;
       using = true;
@@ -99,6 +104,7 @@ function listenOnUser(canvas) {
       }
     };
     canvas.ontouchmove = e => {
+      e.preventDefault();
       let x = e.touches[0].clientX;
       let y = e.touches[0].clientY;
       if (!using) {
