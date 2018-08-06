@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas画板</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+    #canvas {
+        background: #999;
+    }
+
+    #control {
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+    }
+
+    .control>#brush {
+        display: none;
+    }
+
+
+    .active>#brush {
+        display: block;
+    }
+
+    .active>#eraser {
+        display: none;
+    }
+</style>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="control" class="control">
+        <button id="eraser">橡皮擦</button>
+        <button id="brush">画笔</button>
+    </div>
+
+    <script>
+        let canvas = document.getElementById('canvas')
+        let ctx = canvas.getContext('2d')
+
+        autoSetCanvasSize(canvas)
+        listenTomouse(canvas)
+
+        let eraserEnable = false
+        eraser.onclick = (e) => {
+            eraserEnable = true
+            control.className = 'active';
+        }
+
+        brush.onclick = (e) => {
+            eraserEnable = false
+            control.className = 'control';
+        }
+
+
+
+
+
+
+
+        /********下面不用看********/
+
+        function autoSetCanvasSize(canvas) {
+            setCanvasSize()
+            window.onresize = (e) => {  //监听用户拉伸高宽
+                setCanvasSize()
+            }
+            function setCanvasSize() {
+                let pageWidth = document.documentElement.clientWidth
+                let pageHeight = document.documentElement.clientHeight
+                canvas.width = pageWidth
+                canvas.height = pageHeight
+            }
+        }
+
+        function drawLine(x1, y1, x2, y2) { //画线
+            ctx.beginPath()
+            ctx.lineTo(x1, y1);
+            ctx.lineWidth = 3
+            ctx.lineTo(x2, y2);
+            ctx.stroke()
+        }
+
+
+        function listenTomouse(canvas) {
+            let using = false
+            var lastPoint = { x: undefined, y: undefined }
+            canvas.onmousedown = (e) => {
+                let x = e.clientX
+                let y = e.clientY
+                using = true
+                if (eraserEnable) {
+                    ctx.clearRect(x - 7.5, y - 7.5, 15, 15)
+                } else {
+                    lastPoint = { x: x, y: y }
+                }
+            }
+
+            canvas.onmousemove = (e) => {
+                let x = e.clientX
+                let y = e.clientY
+                if (!using) {
+                    return
+                }
+                if (eraserEnable) {
+                    ctx.clearRect(x - 7.5, y - 7.5, 15, 15)
+                } else {
+                    let newPoint = { x: x, y: y }
+                    drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+                    lastPoint = newPoint
+                }
+            }
+            canvas.onmouseup = (e) => {
+                using = false
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>
