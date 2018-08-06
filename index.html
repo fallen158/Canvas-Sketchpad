@@ -5,159 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>Canvas画板</title>
 </head>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        position: relative;
-    }
-
-    #canvas {
-        background: #999;
-    }
-
-    #control {
-        position: absolute;
-        bottom: 5px;
-        left: 0;
-    }
-
-    .control>#brush {
-        display: none;
-    }
-
-
-    .active>#brush {
-        display: block;
-    }
-
-    .active>#eraser {
-        display: none;
-    }
-</style>
 
 <body>
     <canvas id="canvas"></canvas>
     <div id="control" class="control">
-        <button id="eraser">橡皮擦</button>
-        <button id="brush">画笔</button>
+        <svg id="pen" class="icon active" aria-hidden="true">
+            <use xlink:href="#icon-pencil"></use>
+        </svg>
+        <svg id="eraser" class="icon" aria-hidden="true">
+            <use xlink:href="#icon-xiangpica"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-clear"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-xiazai"></use>
+        </svg>
     </div>
-
-    <script>
-        let canvas = document.getElementById('canvas')
-        let ctx = canvas.getContext('2d')
-
-        autoSetCanvasSize(canvas)
-        listenOnUser(canvas)
-        let eraserEnable = false
-        eraser.onclick = (e) => {
-            eraserEnable = true
-            control.className = 'active';
-        }
-
-        brush.onclick = (e) => {
-            eraserEnable = false
-            control.className = 'control';
-        }
-
-
-
-
-
-
-
-
-
-        /********下面不用看********/
-
-        function listenOnUser(canvas) {
-            let using = false
-            var lastPoint = { x: undefined, y: undefined }
-            //特性检查
-            if (document.body.ontouchstart !== undefined) {
-                canvas.ontouchstart = (e)=>{
-                    let x = e.touches[0].clientX
-                    let y = e.touches[0].clientY
-                    using = true
-                    if (eraserEnable) {
-                        ctx.clearRect(x - 7.5, y - 7.5, 15, 15)
-                    } else {
-                        lastPoint = { x: x, y: y }
-                    }
-                }
-                canvas.ontouchmove = (e)=>{
-                    let x = e.touches[0].clientX
-                    let y = e.touches[0].clientY
-                    if (!using) {
-                        return
-                    }
-                    if (eraserEnable) {
-                        ctx.clearRect(x - 7.5, y - 7.5, 15, 15)
-                    } else {
-                        let newPoint = { x: x, y: y }
-                        drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
-                        lastPoint = newPoint
-                    }
-                }
-                canvas.ontouchend = (e) => {
-                    using = false
-                }
-
-            } else {
-                canvas.onmousedown = (e) => {
-                    let x = e.clientX
-                    let y = e.clientY
-                    using = true
-                    if (eraserEnable) {
-                        ctx.clearRect(x - 7.5, y - 7.5, 15, 15)
-                    } else {
-                        lastPoint = { x: x, y: y }
-                    }
-                }
-
-                canvas.onmousemove = (e) => {
-                    let x = e.clientX
-                    let y = e.clientY
-                    if (!using) {
-                        return
-                    }
-                    if (eraserEnable) {
-                        ctx.clearRect(x - 7.5, y - 7.5, 15, 15)
-                    } else {
-                        let newPoint = { x: x, y: y }
-                        drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
-                        lastPoint = newPoint
-                    }
-                }
-                canvas.onmouseup = (e) => {
-                    using = false
-                }
-            }
-        }
-
-        function autoSetCanvasSize(canvas) {
-            setCanvasSize()
-            window.onresize = (e) => {  //监听用户拉伸高宽
-                setCanvasSize()
-            }
-            function setCanvasSize() {
-                let pageWidth = document.documentElement.clientWidth
-                let pageHeight = document.documentElement.clientHeight
-                canvas.width = pageWidth
-                canvas.height = pageHeight
-            }
-        }
-
-        function drawLine(x1, y1, x2, y2) { //画线
-            ctx.beginPath()
-            ctx.lineTo(x1, y1);
-            ctx.lineWidth = 3
-            ctx.lineTo(x2, y2);
-            ctx.stroke()
-        }
-    </script>
+    <script src="//at.alicdn.com/t/font_638577_k40u3jgptghtcsor.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

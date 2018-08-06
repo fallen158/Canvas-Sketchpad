@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+#canvas {
+    background: white;
+}
+
+.control {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+.control >.icon {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+    margin: 20px 0 0 20px;
+    transition: all 0.3s;
+}
+.control >.active{
+    fill: red;
+    transform: scale(1.2)
+}
