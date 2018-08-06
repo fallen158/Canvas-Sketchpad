@@ -11,14 +11,66 @@ eraser.onclick = (e) => {
    
 }
 
+clear.onclick = ()=>{  //清屏
+    ctx.clearRect(0,0,canvas.width,canvas.height)
+}
+
 pen.onclick = (e) => {
     eraserEnable = false
- 
-
     pen.classList.add('active')
     eraser.classList.remove('active')
 }
 
+
+red.onclick = ()=>{
+    ctx.fillStyle = 'red'
+    ctx.strokeStyle = 'red'
+    red.classList.add('active')
+    green.classList.remove('active')
+    pink.classList.remove('active')
+    black.classList.remove('active')
+    blue.classList.remove('active')
+}
+
+green.onclick = ()=>{
+    ctx.fillStyle = 'green'
+    ctx.strokeStyle = 'green'
+    green.classList.add('active')
+    red.classList.remove('active')
+    pink.classList.remove('active')
+    black.classList.remove('active')
+    blue.classList.remove('active')
+}
+
+pink.onclick = ()=>{
+    ctx.fillStyle = 'pink'
+    ctx.strokeStyle = 'pink'
+    pink.classList.add('active')
+    green.classList.remove('active')
+    red.classList.remove('active')
+    black.classList.remove('active')
+    blue.classList.remove('active')
+}
+
+black.onclick = ()=>{
+    ctx.fillStyle = 'black'
+    ctx.strokeStyle = 'black'
+    black.classList.add('active')
+    green.classList.remove('active')
+    pink.classList.remove('active')
+    red.classList.remove('active')
+    blue.classList.remove('active')
+}
+
+blue.onclick = ()=>{
+    ctx.fillStyle = 'blue'
+    ctx.strokeStyle = 'blue'
+    blue.classList.add('active')
+    green.classList.remove('active')
+    pink.classList.remove('active')
+    black.classList.remove('active')
+    red.classList.remove('active')
+}
 
 
 
@@ -51,7 +103,7 @@ function listenOnUser(canvas) {
                 return
             }
             if (eraserEnable) {
-                ctx.clearRect(x - 7.5, y - 7.5, 15, 15)
+                ctx.clearRect(x - 7.5, y - 7.5, 20, 20)
             } else {
                 let newPoint = { x: x, y: y }
                 drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)

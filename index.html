@@ -10,20 +10,29 @@
 </head>
 
 <body>
-    <canvas id="canvas"></canvas>
-    <div id="control" class="control">
-        <svg id="pen" class="icon active" aria-hidden="true">
-            <use xlink:href="#icon-pencil"></use>
-        </svg>
-        <svg id="eraser" class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xiangpica"></use>
-        </svg>
-        <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-clear"></use>
-        </svg>
-        <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xiazai"></use>
-        </svg>
+    <div class="app">
+        <canvas id="canvas"></canvas>
+        <div id="control" class="control">
+            <svg id="pen" class="icon active" aria-hidden="true">
+                <use xlink:href="#icon-pencil"></use>
+            </svg>
+            <svg id="eraser" class="icon" aria-hidden="true">
+                <use xlink:href="#icon-xiangpica"></use>
+            </svg>
+            <svg id="clear" class="icon" aria-hidden="true">
+                <use xlink:href="#icon-clear"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-xiazai"></use>
+            </svg>
+        </div>
+        <ol class="colors">
+            <li id="black" class="black active"></li>
+            <li id="red" class="red"> </li>
+            <li id="blue" class="blue"></li>
+            <li id="pink" class="pink"></li>
+            <li id="green" class="green"></li>
+        </ol>
     </div>
     <script src="//at.alicdn.com/t/font_638577_k40u3jgptghtcsor.js"></script>
     <script src="main.js"></script>
